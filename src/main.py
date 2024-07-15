@@ -14,7 +14,7 @@ def get_current_time():
     return str(datetime.now().time())[:-7]
 
 def schedule_texts():
-    message_times = ['13:57:00']
+    message_times = get_hydration_times()
     while(True):
         if get_current_time() in message_times:
             send_message('Lets get hydrated', recieving_number)
