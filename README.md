@@ -10,8 +10,13 @@ HydraAlert is made to alert athletes when they should drink water given a spread
 Create a .env to store your api keys and any other secrets.
 To Run locally, follow the readme in the src directory.
 
+## Help
+
+## Version History
+
 ## Acknowledgements
 
+## License
 
 ## Authors
 [@fostemi](github.com/fostemi)
