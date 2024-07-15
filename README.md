@@ -6,15 +6,23 @@ HydraAlert is made to alert athletes when they should drink water given a spread
 ## Getting Started
 ### Dependencies
 * [Twilio](https://www.twilio.com/en-us)
+* [Google Sheets](https://docs.google.com/spreadsheets/u/0/)
 ### Installing & Running
 Create a .env to store your api keys and any other secrets.
 To Run locally, follow the readme in the src directory.
+Currently, I am supporting running locally. Future plans will be to have a server running this program.
+Spreadsheet must follow this [design](https://docs.google.com/spreadsheets/d/1QPrWQh2f8m0EFWZF_Qf_AlE6ErnNjTGQYKNfwBxQqgE/edit?gid=0#gid=0)
 
 ## Help
+Open an issue if you have any problems running and setting the needed vars. 
 
 ## Version History
+* 0.1 - Initial Release
+    * Ability to read from google sheet to update times.
+    * Issues: Only able to read spreadsheet in specific format.
 
 ## Acknowledgements
+* [Google Workspace Docs](https://developers.google.com/sheets/api/quickstart/python)
 
 ## License
 
