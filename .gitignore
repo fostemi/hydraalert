@@ -1,0 +1,8 @@
+# Twilio Recovery
+secrets.txt
+
+# Secrets 
+.env
+
+# Python Language
+.venv
