@@ -1,6 +1,7 @@
 from twilio.rest import Client
 from datetime import datetime
 import os
+import os.path
 
 def set_environment():
     global account_sid, auth_token, recieving_number, twilio_client

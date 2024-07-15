@@ -3,6 +3,12 @@ secrets.txt
 
 # Secrets 
 .env
+sheets_credentials.json
+credentials.json
+token.json
 
 # Python Language
 .venv
+
+# Mac Stuff
+.DS_Store
