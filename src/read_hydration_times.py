@@ -83,5 +83,3 @@ def get_hydration_times():
         time = convert_to_millitary_time(time)
         hydration_times += time
     return hydration_times
-    
-get_hydration_times()
