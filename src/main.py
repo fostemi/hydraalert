@@ -13,12 +13,19 @@ def set_environment():
 def get_current_time():
     return str(datetime.now().time())[:-7]
 
+def get_current_day():
+    return datetime.now().date().day
+
 def schedule_texts():
     message_times = get_hydration_times()
+    day = get_current_day()
     while(True):
         if get_current_time() in message_times:
             send_message('Lets get hydrated', recieving_number)
             time.sleep(1)
+        if get_current_day() != day:
+            message_times = get_hydration_times()
+            day = get_current_day()
 
 def send_message(message, reciever):
     message = twilio_client.messages.create(
