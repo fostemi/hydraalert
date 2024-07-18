@@ -46,6 +46,16 @@ def read_hydration_times():
 
 def convert_to_millitary_time(time):
     if time[8:] == 'PM' or time[9:] == 'PM':
+        match time[0:2]:
+            case '10':
+                time = '22' + time[2:]
+                return time[:-3]
+            case '11':
+                time = '23' + time[2:]
+                return time[:-3]
+            case '12':
+                time = '24' + time[2:]
+                return time[:-3]
         match time[0:1]:
             case '1':
                 time = '13' + time[1:]
@@ -65,13 +75,6 @@ def convert_to_millitary_time(time):
                 time = '20' + time[1:]
             case '9':
                 time = '21' + time[1:]
-        match time[0:2]:
-            case '10':
-                time = '22' + time[:2]
-            case '11':
-                time = '23' + time[:2]
-            case '12':
-                time = '24' + time[:2]
     return time[:-3]
 
 def get_hydration_times():
