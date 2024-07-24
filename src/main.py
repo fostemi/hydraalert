@@ -2,7 +2,7 @@ from twilio.rest import Client
 from datetime import datetime
 import os
 import os.path
-from read_hydration_times import *
+from read_hydration_times import get_hydration_times
 import time
 
 def set_environment():
