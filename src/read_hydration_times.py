@@ -10,7 +10,10 @@ from googleapiclient.errors import HttpError
 # always pull from google sheets?
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 
-SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1QPrWQh2f8m0EFWZF_Qf_AlE6ErnNjTGQYKNfwBxQqgE/"
+SPREADSHEET_URL = (
+    "https://docs.google.com/spreadsheets/d/1QPrWQh2f8m0EFWZF_Qf_AlE6ErnNjTGQYKNfwBxQqgE/"
+)
+
 RANGE_NAME = "A:Z"
 
 def parse_spreadsheet_id(url):
@@ -31,7 +34,7 @@ def read_google_sheet_hydration_times():
                 "credentials.json", SCOPES
             )
             creds = flow.run_local_server(port=0)
-        with open("token.json", "w") as token:
+        with open("token.json", "w", encoding='UTF-8') as token:
             token.write(creds.to_json())
 
     try:
@@ -46,7 +49,7 @@ def read_google_sheet_hydration_times():
 
         if not values:
             print("No data found.")
-            return
+            return values
 
         return values
     except HttpError as err:
