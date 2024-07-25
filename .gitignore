@@ -12,3 +12,5 @@ token.json
 
 # Mac Stuff
 .DS_Store
+
+.pylintrc
