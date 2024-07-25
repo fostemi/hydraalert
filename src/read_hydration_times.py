@@ -16,7 +16,7 @@ def parse_spreadsheet_id(url):
     id = url[id_start:id_end]
     return id
 
-SPREADSHEET_ID = parse_spreadsheet_id("https://docs.google.com/spreadsheets/d/1QPrWQh2f8m0EFWZF_Qf_AlE6ErnNjTGQYKNfwBxQqgE/")
+SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1QPrWQh2f8m0EFWZF_Qf_AlE6ErnNjTGQYKNfwBxQqgE/"
 RANGE_NAME = "A:Z"
 
 def read_google_sheet_hydration_times():
@@ -39,7 +39,7 @@ def read_google_sheet_hydration_times():
         sheet = service.spreadsheets()
         result = (
             sheet.values()
-            .get(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME)
+            .get(spreadsheetId=parse_spreadsheet_id(SPREADSHEET_URL), range=RANGE_NAME)
             .execute()
         )
         values = result.get("values", [])
