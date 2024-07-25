@@ -1,4 +1,5 @@
 import os.path
+import introcs
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -6,12 +7,19 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
+# always pull from google sheets?
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 
-SPREADSHEET_ID = "1QPrWQh2f8m0EFWZF_Qf_AlE6ErnNjTGQYKNfwBxQqgE"
+def parse_spreadsheet_id(url):
+    id_start = introcs.find_str(url, '/d/', 0) + 3
+    id_end = introcs.find_str(url, '/', id_start)
+    id = url[id_start:id_end]
+    return id
+
+SPREADSHEET_ID = parse_spreadsheet_id("https://docs.google.com/spreadsheets/d/1QPrWQh2f8m0EFWZF_Qf_AlE6ErnNjTGQYKNfwBxQqgE/")
 RANGE_NAME = "A:Z"
 
-def read_hydration_times():
+def read_google_sheet_hydration_times():
     creds = None
     if os.path.exists("token.json"):
         creds = Credentials.from_authorized_user_file("token.json", SCOPES)
@@ -79,7 +87,7 @@ def convert_to_millitary_time(time):
 
 def get_hydration_times():
     hydration_times = []
-    values = read_hydration_times()
+    values = read_google_sheet_hydration_times()
     times = values[1]
     times = times[1:]
     for time in times:
