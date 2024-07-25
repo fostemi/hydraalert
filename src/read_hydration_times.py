@@ -10,14 +10,14 @@ from googleapiclient.errors import HttpError
 # always pull from google sheets?
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 
+SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1QPrWQh2f8m0EFWZF_Qf_AlE6ErnNjTGQYKNfwBxQqgE/"
+RANGE_NAME = "A:Z"
+
 def parse_spreadsheet_id(url):
     id_start = introcs.find_str(url, '/d/', 0) + 3
     id_end = introcs.find_str(url, '/', id_start)
     id = url[id_start:id_end]
     return id
-
-SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1QPrWQh2f8m0EFWZF_Qf_AlE6ErnNjTGQYKNfwBxQqgE/"
-RANGE_NAME = "A:Z"
 
 def read_google_sheet_hydration_times():
     creds = None
