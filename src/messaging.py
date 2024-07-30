@@ -12,12 +12,6 @@ def set_twilio_env():
     recieving_number = os.environ['RECIEVING_PHONE_NUMBER']
     twilio_client = Client(account_sid, auth_token)
 
-def get_current_time():
-    return str(datetime.now().time())[:-7]
-
-def get_current_day():
-    return datetime.now().date().day
-
 def schedule_texts():
     message_times = get_hydration_times()
     day = get_current_day()
@@ -35,4 +29,10 @@ def send_message(message, reciever):
         body=message,
         to=reciever
     )
+
+def get_current_time():
+    return str(datetime.now().time())[:-7]
+
+def get_current_day():
+    return datetime.now().date().day
 

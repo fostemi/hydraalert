@@ -1,3 +1,4 @@
+"""Has all the functionalities to gather hydration time information for the messaging fixture."""
 import os.path
 import introcs
 
@@ -17,12 +18,13 @@ SPREADSHEET_URL = (
 RANGE_NAME = "A:Z"
 
 def parse_spreadsheet_id(url):
+    """Helper function to parse spreadsheet url into the Spreadsheet id."""
     id_start = introcs.find_str(url, '/d/', 0) + 3
     id_end = introcs.find_str(url, '/', id_start)
-    id = url[id_start:id_end]
-    return id
+    return url[id_start:id_end]
 
 def read_google_sheet_hydration_times():
+    """Function from google to read cells in a google spreadsheet."""
     creds = None
     if os.path.exists("token.json"):
         creds = Credentials.from_authorized_user_file("token.json", SCOPES)
@@ -49,13 +51,15 @@ def read_google_sheet_hydration_times():
 
         if not values:
             print("No data found.")
-            return values
+            return
 
         return values
     except HttpError as err:
         print(err)
+    return
 
 def convert_to_millitary_time(time):
+    """Helper function to convert time to Millitary time."""
     if time[8:] == 'PM' or time[9:] == 'PM':
         match time[0:2]:
             case '10':
@@ -89,6 +93,7 @@ def convert_to_millitary_time(time):
     return time[:-3]
 
 def get_hydration_times():
+    """Reads times from spreadsheet and reformats them into a list of times."""
     hydration_times = []
     values = read_google_sheet_hydration_times()
     times = values[1]
