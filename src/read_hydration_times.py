@@ -56,7 +56,6 @@ def read_google_sheet_hydration_times():
         return values
     except HttpError as err:
         print(err)
-    return
 
 def convert_to_millitary_time(time):
     """Helper function to convert time to Millitary time."""
