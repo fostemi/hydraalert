@@ -9,6 +9,7 @@ token.json
 
 # Python Language
 .venv
+__pycache__
 
 # Mac Stuff
 .DS_Store
