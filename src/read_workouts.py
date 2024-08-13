@@ -22,12 +22,13 @@ class Workout:
         self.excercise = excercise
         self.distance = distance
 
-def parse_workout_sheet_title(values):
-    return values[0][0]
-
 def build_workout_program():
     wp = WorkoutProgram
     values = read_google_sheet(WORKOUT_RANGE)
     wp.title = parse_workout_sheet_title(values)
+    return wp
 
+
+def parse_workout_sheet_title(values):
+    return values[0][0]
 # We are reading the same spreadsheet so we just have to refactor the existing code to extract the read_sheet() function to it's own file
