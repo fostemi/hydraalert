@@ -9,8 +9,9 @@ WAKE_UP = '6:00:00 AM'
 WORKOUT_RANGE = "Sheet2!A:Z"
 
 class WorkoutProgram:
-    def __init__(self, workouts):
-        workouts = workouts
+    def __init__(self):
+        self.title = ""
+        self.workouts = []
     def add_workout(workout):
         workouts += workout
 
@@ -21,8 +22,12 @@ class Workout:
         self.excercise = excercise
         self.distance = distance
 
-def parse_workout_sheet_title():
-    values = read_google_sheet(WORKOUT_RANGE)
+def parse_workout_sheet_title(values):
     return values[0][0]
+
+def build_workout_program():
+    wp = WorkoutProgram
+    values = read_google_sheet(WORKOUT_RANGE)
+    wp.title = parse_workout_sheet_title(values)
 
 # We are reading the same spreadsheet so we just have to refactor the existing code to extract the read_sheet() function to it's own file
