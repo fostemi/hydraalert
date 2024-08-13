@@ -16,16 +16,24 @@ class WorkoutProgram:
         workouts += workout
 
 class Workout:
-    def __init__(self, day, week, excercise, distance):
-        self.day = day
-        self.week = week
-        self.excercise = excercise
-        self.distance = distance
+    def __init__(self):
+        self.day = 0
+        self.week = 0
+        self.excercise = ""
+        self.distance = ""
 
 def build_workout_program():
     wp = WorkoutProgram
     values = read_google_sheet(WORKOUT_RANGE)
     wp.title = parse_workout_sheet_title(values)
+    print(values[1][0])
+    # for row in values:
+    #     for col in row:
+    #         w = Workout
+
+            # if values[1][col] == "Week":
+            #     w.week = col
+
     return wp
 
 
