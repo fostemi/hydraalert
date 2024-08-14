@@ -35,8 +35,8 @@ def build_workout_program():
             parse_bike_row(wp, row, week_num)
         elif 'Run' in row:
             parse_run_row(wp, row, week_num)
-        # else:
-            # handle error
+        else:
+            raise Exception("Incorrect formatting of row. Please include workouts")
     return wp
 
 
