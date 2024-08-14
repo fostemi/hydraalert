@@ -12,8 +12,8 @@ class WorkoutProgram:
     def __init__(self, title=""):
         self.title = title
         self.workouts = []
-    def add_workout(workout):
-        workouts += workout
+    def add_workout(self, workout):
+        self.workouts.append(workout)
 
 class Workout:
     def __init__(self, day=0, week=0, excercise="", distance=""):
@@ -29,7 +29,7 @@ def build_workout_program():
     for row in values:
         if 'Swim' in row:
             week_num = int(row[0])
-            parse_swim_row(row, week_num)
+            parse_swim_row(wp, row, week_num)
             # print(week_num)
             # print(row)
         # elif 'Bike' in row:
@@ -38,25 +38,20 @@ def build_workout_program():
             # handle run row
         # else:
             # handle error
-    print(wp.title)
     return wp
 
 
 def parse_workout_sheet_title(values):
     return values[0][0]
 
-def parse_swim_row(week_workouts, week_num):
+def parse_swim_row(workout_program, week_workouts, week_num):
     swims = week_workouts[2:]
-    workouts = []
     day = 0
     for swim in swims:
         day += 1
         if swim == 'Rest':
-            # TODO
-            # handles rest day
-            print("rest day")
+            # TODO: handle rest day
+            pass
         elif swim != '':
             workout = Workout(day, week_num, 'Swim', swim)
-            workouts.append(workout)
-    return workouts
-
+            workout_program.add_workout(workout)

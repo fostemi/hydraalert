@@ -7,12 +7,6 @@ def workout_program():
     workout_program = build_workout_program()
     yield workout_program
     print("teardown")
-@pytest.fixture()
-def swim_week():
-    print("setup swim tests")
-    swim_week = ['8', 'Swim', 'Rest', '1 mile', '', '1 mile', '', '', 'Rest']
-    yield swim_week
-    print("teardown swim tests")
 
 def assert_workouts_eq(got, want):
         assert got.day == want.day, "got " + str(got.day) + " should be " + str(want.day)
@@ -26,7 +20,9 @@ class TestWorkoutProgram:
         got = workout_program.title
         assert got == want, "got " + got + " should be " + want
 
-    def test_parse_swim_row(self, swim_week):
-        want = Workout(2, 8, 'Swim', '1 mile')
-        got = parse_swim_row(swim_week, 8)[0]
-        assert_workouts_eq(got, want)
+    def test_parse_swim_row(self, workout_program):
+        want = [Workout(2, 8, 'Swim', '1 mile'), Workout(4, 8, 'Swim', '1 mile')]
+        got = workout_program.workouts
+        assert_workouts_eq(got[0], want[0])
+        assert_workouts_eq(got[1], want[1])
+
