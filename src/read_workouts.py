@@ -26,16 +26,15 @@ def build_workout_program():
     values = read_google_sheet(WORKOUT_RANGE)
     wp = WorkoutProgram(title=parse_workout_sheet_title(values))
     values = values[2:][:]
+    week_num = -1
     for row in values:
         if 'Swim' in row:
             week_num = int(row[0])
             parse_swim_row(wp, row, week_num)
-            # print(week_num)
-            # print(row)
-        # elif 'Bike' in row:
-            # handle bike row
-        # elif 'Run' in row:
-            # handle run row
+        elif 'Bike' in row:
+            parse_bike_row(wp, row, week_num)
+        elif 'Run' in row:
+            parse_run_row()
         # else:
             # handle error
     return wp
@@ -55,3 +54,17 @@ def parse_swim_row(workout_program, week_workouts, week_num):
         elif swim != '':
             workout = Workout(day, week_num, 'Swim', swim)
             workout_program.add_workout(workout)
+
+def parse_bike_row(workout_program, week_workouts, week_num):
+    bikes = week_workouts[2:]
+    day = 0
+    for bike in bikes:
+        day += 1
+        if bike == 'Rest':
+            pass
+        elif bike != '':
+            workout = Workout(day, week_num, 'Bike', bike)
+            workout_program.add_workout(workout)
+
+def parse_run_row():
+    pass

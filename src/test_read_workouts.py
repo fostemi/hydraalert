@@ -1,5 +1,5 @@
 import pytest
-from read_workouts import build_workout_program, parse_swim_row, Workout
+from read_workouts import build_workout_program, parse_bike_row, Workout
 
 @pytest.fixture()
 def workout_program():
@@ -25,4 +25,11 @@ class TestWorkoutProgram:
         got = workout_program.workouts
         assert_workouts_eq(got[0], want[0])
         assert_workouts_eq(got[1], want[1])
+
+    def test_parse_bike_row(self, workout_program):
+        pass
+        want = [Workout(5, 8, 'Bike', '16 miles'), Workout(6, 8, 'Bike', '24 miles')]
+        got = workout_program.workouts
+        assert_workouts_eq(got[2], want[0])
+        assert_workouts_eq(got[3], want[1])
 
