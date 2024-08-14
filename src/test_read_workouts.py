@@ -37,4 +37,9 @@ class TestWorkoutProgram:
         got = workout_program.workouts
         assert_workouts_eq(got[4], want[0])
         assert_workouts_eq(got[5], want[1])
+    
+    def test_get_workout_by_day(self, workout_program):
+        want = Workout(3, 8, 'Run', '7 miles')
+        got = workout_program.get_workout_by_day(8, 3)
+        assert_workouts_eq(got, want)
 

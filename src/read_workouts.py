@@ -2,10 +2,10 @@
 # Get the workout for that day
 # send message of the workout
     # While loop loops until trigger at the wake up time for the day
-# Hard code wake up time for now
 from read_google_spreadsheet import read_google_sheet
 
-WAKE_UP = '6:00:00 AM'
+# TODO: User inputs
+WAKE_UP = '5:59:00 AM'
 WORKOUT_RANGE = "Sheet2!A:Z"
 
 class WorkoutProgram:
@@ -14,6 +14,10 @@ class WorkoutProgram:
         self.workouts = []
     def add_workout(self, workout):
         self.workouts.append(workout)
+    def get_workout_by_day(self, week, day):
+        for workout in self.workouts:
+            if week == workout.week and day == workout.day:
+                return workout
 
 class Workout:
     def __init__(self, day=0, week=0, excercise="", distance=""):
