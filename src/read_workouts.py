@@ -34,7 +34,7 @@ def build_workout_program():
         elif 'Bike' in row:
             parse_bike_row(wp, row, week_num)
         elif 'Run' in row:
-            parse_run_row()
+            parse_run_row(wp, row, week_num)
         # else:
             # handle error
     return wp
@@ -66,5 +66,13 @@ def parse_bike_row(workout_program, week_workouts, week_num):
             workout = Workout(day, week_num, 'Bike', bike)
             workout_program.add_workout(workout)
 
-def parse_run_row():
-    pass
+def parse_run_row(workout_program, week_workouts, week_num):
+    runs = week_workouts[2:]
+    day = 0
+    for run in runs:
+        day += 1
+        if run == 'Rest':
+            pass
+        elif run != '':
+            workout = Workout(day, week_num, 'Run', run)
+            workout_program.add_workout(workout)
