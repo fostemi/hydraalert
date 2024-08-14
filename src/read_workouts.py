@@ -9,34 +9,54 @@ WAKE_UP = '6:00:00 AM'
 WORKOUT_RANGE = "Sheet2!A:Z"
 
 class WorkoutProgram:
-    def __init__(self):
-        self.title = ""
+    def __init__(self, title=""):
+        self.title = title
         self.workouts = []
     def add_workout(workout):
         workouts += workout
 
 class Workout:
-    def __init__(self):
-        self.day = 0
-        self.week = 0
-        self.excercise = ""
-        self.distance = ""
+    def __init__(self, day=0, week=0, excercise="", distance=""):
+        self.day = day
+        self.week = week
+        self.excercise = excercise
+        self.distance = distance
 
 def build_workout_program():
-    wp = WorkoutProgram
     values = read_google_sheet(WORKOUT_RANGE)
-    wp.title = parse_workout_sheet_title(values)
-    print(values[1][0])
-    # for row in values:
-    #     for col in row:
-    #         w = Workout
-
-            # if values[1][col] == "Week":
-            #     w.week = col
-
+    wp = WorkoutProgram(title=parse_workout_sheet_title(values))
+    values = values[2:][:]
+    for row in values:
+        if 'Swim' in row:
+            week_num = int(row[0])
+            parse_swim_row(row, week_num)
+            # print(week_num)
+            # print(row)
+        # elif 'Bike' in row:
+            # handle bike row
+        # elif 'Run' in row:
+            # handle run row
+        # else:
+            # handle error
+    print(wp.title)
     return wp
 
 
 def parse_workout_sheet_title(values):
     return values[0][0]
-# We are reading the same spreadsheet so we just have to refactor the existing code to extract the read_sheet() function to it's own file
+
+def parse_swim_row(week_workouts, week_num):
+    swims = week_workouts[2:]
+    workouts = []
+    day = 0
+    for swim in swims:
+        day += 1
+        if swim == 'Rest':
+            # TODO
+            # handles rest day
+            print("rest day")
+        elif swim != '':
+            workout = Workout(day, week_num, 'Swim', swim)
+            workouts.append(workout)
+    return workouts
+
