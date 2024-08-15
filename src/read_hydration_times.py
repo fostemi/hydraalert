@@ -12,7 +12,7 @@ def parse_hydration_times():
     times = times[1:]
     for time in times:
         time = convert_to_millitary_time(time)
-        hydration_times += time
+        hydration_times.append(time)
     return hydration_times
 
 def convert_to_millitary_time(time):

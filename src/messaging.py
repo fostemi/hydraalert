@@ -11,6 +11,8 @@ ACCOUNT_SID = os.environ['TWILIO_SID']
 AUTH_TOKEN = os.environ['TWILIO_AUTH_TOKEN']
 RECIEVING_NUMBER = os.environ['RECIEVING_PHONE_NUMBER']
 SEND_NUMBER = os.environ['SEND_PHONE_NUMBER']
+# TODO: User input
+WAKE_UP = '19:59:00'
 
 twilio_client = Client(ACCOUNT_SID, AUTH_TOKEN)
 

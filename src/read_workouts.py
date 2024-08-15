@@ -5,7 +5,6 @@
 from read_google_spreadsheet import read_google_sheet
 
 # TODO: User inputs
-WAKE_UP = '5:59:00 AM'
 WORKOUT_RANGE = "Sheet2!A:Z"
 
 class WorkoutProgram:
