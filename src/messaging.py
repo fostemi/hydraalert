@@ -6,13 +6,15 @@ from datetime import datetime
 from twilio.rest import Client
 from read_hydration_times import parse_hydration_times
 from read_workouts import build_workout_program
+from build_message import build_morning_message
 
 ACCOUNT_SID = os.environ['TWILIO_SID']
 AUTH_TOKEN = os.environ['TWILIO_AUTH_TOKEN']
 RECIEVING_NUMBER = os.environ['RECIEVING_PHONE_NUMBER']
 SEND_NUMBER = os.environ['SEND_PHONE_NUMBER']
 # TODO: User input
-WAKE_UP = '19:59:00'
+WAKE_UP = '06:45:00'
+HYDRATION_ENABLED = False
 
 twilio_client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
@@ -20,16 +22,16 @@ def schedule_texts():
     """Forever loop triggers messages when time equals message time."""
     message_times = parse_hydration_times()
     workout_program = build_workout_program()
-    week = 8
+    week = 9
     day = get_current_day()
     while True:
-        if get_current_time() in message_times:
+        if get_current_time() in message_times and HYDRATION_ENABLED:
             send_message('Lets get hydrated', RECIEVING_NUMBER)
             time.sleep(1)
         if get_current_time() == WAKE_UP:
             current_day = get_current_weekday()
             workout = workout_program.get_workout_by_day(week, current_day)
-            send_message('Workout time' + workout.excercise + " for " + workout.distance, RECIEVING_NUMBER)
+            send_message(build_morning_message(workout), RECIEVING_NUMBER)
             if current_day == 6:
                 week += 1
             time.sleep(1)

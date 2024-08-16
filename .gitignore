@@ -6,6 +6,7 @@ secrets.txt
 sheets_credentials.json
 credentials.json
 token.json
+secrets/
 
 # Python Language
 .venv
