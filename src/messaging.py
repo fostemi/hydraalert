@@ -5,7 +5,7 @@ from handle_messaging import handle_workout_messaging, handle_hydration_messagin
 from utils import get_current_time, get_current_day
 
 # TODO: User input
-WAKE_UP = '20:06:30'
+WAKE_UP = '06:00:00'
 HYDRATION_ENABLED = False
 
 def schedule_texts():
