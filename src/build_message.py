@@ -1,4 +1,13 @@
 from utils import *
+from twilio.rest import Client
+import os
+import os.path
+
+ACCOUNT_SID = os.environ['TWILIO_SID']
+AUTH_TOKEN = os.environ['TWILIO_AUTH_TOKEN']
+SEND_NUMBER = os.environ['SEND_PHONE_NUMBER']
+
+twilio_client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
 def build_morning_message(workout):
     file = open("goggins_transcript.txt", "r")
@@ -17,3 +26,10 @@ def build_morning_message(workout):
     return response
     # return get_completion(prompt)
 
+def send_message(message, reciever):
+    """Helper function to send message."""
+    message = twilio_client.messages.create(
+        from_=SEND_NUMBER,
+        body=message,
+        to=reciever
+    )
