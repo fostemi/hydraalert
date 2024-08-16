@@ -20,6 +20,9 @@ Open an issue if you have any problems running and setting the needed vars.
 * 0.1 - Initial Release
     * Ability to read from google sheet to update times.
     * Issues: Only able to read spreadsheet in specific format.
+* 0.2 - Initial Workout Release
+    * New: Ability to read workout program and send motivational messages every morning
+    * Issues: Only specific spreadsheet formats. 
 
 ## Acknowledgements
 * [Google Workspace Docs](https://developers.google.com/sheets/api/quickstart/python)
