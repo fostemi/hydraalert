@@ -13,7 +13,7 @@ def schedule_texts():
     message_times = parse_hydration_times()
     workout_program = build_workout_program()
     day = get_current_day()
-    wakeup_times_users = {WAKE_UP: [workout_program]}
+    wakeup_times_users = {'08:00:00': [workout_program]}
     while True:
         if get_current_time() in message_times and HYDRATION_ENABLED:
             handle_hydration_messaging()

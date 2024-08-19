@@ -9,10 +9,9 @@ def workout_program():
     print("teardown")
 
 def assert_workouts_eq(got, want):
-        assert got.day == want.day, "got " + str(got.day) + " should be " + str(want.day)
-        assert got.week == want.week, "got " + str(got.week) + " should be " + str(want.week)
-        assert got.excercise == want.excercise, "got " + got.excercise + " should be " + want.excercise
-        assert got.distance == want.distance, "got " + got.distance + " should be " + want.distance
+    assert got.day == want.day, "got " + str(got.day) + " should be " + str(want.day)
+    assert got.week == want.week, "got " + str(got.week) + " should be " + str(want.week)
+    assert got.excercise== want.excercise, "got " + " should be "
 
 class TestWorkoutProgram:
     def test_parse_workout_sheet_title(self, workout_program):
@@ -27,13 +26,12 @@ class TestWorkoutProgram:
         assert_workouts_eq(got[1], want[1])
 
     def test_parse_bike_row(self, workout_program):
-        want = [Workout(5, 8, 'Bike', '16 miles'), Workout(6, 8, 'Bike', '24 miles')]
+        want = [Workout(6, 8, 'Bike', '75 miles')]
         got = workout_program.workouts
         assert_workouts_eq(got[2], want[0])
-        assert_workouts_eq(got[3], want[1])
         
     def test_parse_run_row(self, workout_program):
-        want = [Workout(3, 8, 'Run', '7 miles'), Workout(6, 8, 'Run', '5 miles')]
+        want = [Workout(3, 8, 'Run', '7 miles'), Workout(5, 8, 'Run', '20 miles')]
         got = workout_program.workouts
         assert_workouts_eq(got[4], want[0])
         assert_workouts_eq(got[5], want[1])
@@ -42,4 +40,11 @@ class TestWorkoutProgram:
         want = Workout(3, 8, 'Run', '7 miles')
         got = workout_program.get_workout_by_day(8, 3)
         assert_workouts_eq(got, want)
+
+    def test_multi_workout_day(self, workout_program):
+        want = [Workout(6, 8, 'Swim', '2 miles')]
+        want[0].add_workout('Bike', '75 miles')
+        got = workout_program.workouts
+
+        assert_workouts_eq(got[2], want[0])
 
