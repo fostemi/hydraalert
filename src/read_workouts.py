@@ -35,7 +35,7 @@ class Workout:
         self.week = week
         self.excercise = excercise + " " + distance
     def add_workout(self, excercise, distance):
-        self.excercise = excercise + " " + distance
+        self.excercise = self.excercise + " and " +excercise + " " + distance
         
 
 def build_workout_program():
@@ -72,6 +72,7 @@ def parse_swim_row(workout_program, week_workouts, week_num):
             workout_program.add_workout(workout)
 
 def parse_bike_row(workout_program, week_workouts, week_num):
+    """ Monday is considered day 1. """
     bikes = week_workouts[2:]
     day = 0
     for bike in bikes:
@@ -86,7 +87,7 @@ def parse_bike_row(workout_program, week_workouts, week_num):
                 workout_program.add_workout_in_pos(pos, prev_workout)
             else:
                 workout = Workout(day, week_num, 'Bike', bike)
-            workout_program.add_workout(workout)
+                workout_program.add_workout(workout)
 
 
 def parse_run_row(workout_program, week_workouts, week_num):

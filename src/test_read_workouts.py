@@ -26,9 +26,9 @@ class TestWorkoutProgram:
         assert_workouts_eq(got[1], want[1])
 
     def test_parse_bike_row(self, workout_program):
-        want = [Workout(6, 8, 'Bike', '75 miles')]
+        want = [Workout(7, 8, 'Bike', '16 miles')]
         got = workout_program.workouts
-        assert_workouts_eq(got[2], want[0])
+        assert_workouts_eq(got[3], want[0])
         
     def test_parse_run_row(self, workout_program):
         want = [Workout(3, 8, 'Run', '7 miles'), Workout(5, 8, 'Run', '20 miles')]
@@ -45,6 +45,5 @@ class TestWorkoutProgram:
         want = [Workout(6, 8, 'Swim', '2 miles')]
         want[0].add_workout('Bike', '75 miles')
         got = workout_program.workouts
-
         assert_workouts_eq(got[2], want[0])
 
