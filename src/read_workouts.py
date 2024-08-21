@@ -59,7 +59,7 @@ def build_workout_program():
 def parse_workout_sheet_title(values):
     return values[0][0]
 
-def parse_swim_row(workout_program, week_workouts, week_num):
+def parse_swim_row(workout_program, week_workouts, week):
     swims = week_workouts[2:]
     day = 0
     for swim in swims:
@@ -68,10 +68,10 @@ def parse_swim_row(workout_program, week_workouts, week_num):
             # TODO: handle rest day
             pass
         elif swim != '':
-            workout = Workout(day, week_num, 'Swim', swim)
+            workout = Workout(day, week, 'Swim', swim)
             workout_program.add_workout(workout)
 
-def parse_bike_row(workout_program, week_workouts, week_num):
+def parse_bike_row(workout_program, week_workouts, week):
     """ Monday is considered day 1. """
     bikes = week_workouts[2:]
     day = 0
@@ -80,16 +80,9 @@ def parse_bike_row(workout_program, week_workouts, week_num):
         if bike == 'Rest':
             pass
         elif bike != '':
-            prev_workout = workout_program.get_workout_by_day(week_num, day)
-            if prev_workout != None:
-                pos = workout_program.remove_workout(prev_workout)
-                workout = prev_workout.add_workout('Bike', bike)
-                workout_program.add_workout_in_pos(pos, prev_workout)
-            else:
-                workout = Workout(day, week_num, 'Bike', bike)
-                workout_program.add_workout(workout)
+            create_workout(workout_program, week, day, 'Bike', bike)
 
-def parse_run_row(workout_program, week_workouts, week_num):
+def parse_run_row(workout_program, week_workouts, week):
     runs = week_workouts[2:]
     day = 0
     for run in runs:
@@ -97,11 +90,15 @@ def parse_run_row(workout_program, week_workouts, week_num):
         if run == 'Rest':
             pass
         elif run != '':
-            prev_workout = workout_program.get_workout_by_day(week_num, day)
+            create_workout(workout_program, week, day, 'Run', run)
+
+def create_workout(workout_program, week, day, excercise, distance):
+            prev_workout = workout_program.get_workout_by_day(week, day)
             if prev_workout != None:
                 pos = workout_program.remove_workout(prev_workout)
-                workout = prev_workout.add_workout('Run', run)
+                workout = prev_workout.add_workout(excercise, distance)
                 workout_program.add_workout_in_pos(pos, prev_workout)
             else:
-                workout = Workout(day, week_num, 'Run', run)
+                workout = Workout(day, week, excercise, distance)
                 workout_program.add_workout(workout)
+

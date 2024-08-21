@@ -45,5 +45,6 @@ class TestWorkoutProgram:
         want = [Workout(6, 8, 'Swim', '2 miles')]
         want[0].add_workout('Bike', '75 miles')
         got = workout_program.workouts
+        print("got == " + got[2].excercise)
         assert_workouts_eq(got[2], want[0])
 
