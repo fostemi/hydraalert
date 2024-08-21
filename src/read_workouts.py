@@ -89,7 +89,6 @@ def parse_bike_row(workout_program, week_workouts, week_num):
                 workout = Workout(day, week_num, 'Bike', bike)
                 workout_program.add_workout(workout)
 
-
 def parse_run_row(workout_program, week_workouts, week_num):
     runs = week_workouts[2:]
     day = 0
@@ -98,5 +97,11 @@ def parse_run_row(workout_program, week_workouts, week_num):
         if run == 'Rest':
             pass
         elif run != '':
-            workout = Workout(day, week_num, 'Run', run)
-            workout_program.add_workout(workout)
+            prev_workout = workout_program.get_workout_by_day(week_num, day)
+            if prev_workout != None:
+                pos = workout_program.remove_workout(prev_workout)
+                workout = prev_workout.add_workout('Run', run)
+                workout_program.add_workout_in_pos(pos, prev_workout)
+            else:
+                workout = Workout(day, week_num, 'Run', run)
+                workout_program.add_workout(workout)
