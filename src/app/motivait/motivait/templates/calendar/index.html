@@ -1,12 +1,14 @@
+<!-- index.html -->
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
   <title>Calendar with Motivation</title>
   <script src="https://unpkg.com/htmx.org@1.8.4"></script>
-  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="{% static 'motivait/style.css' %}"/>
 </head>
 <body>
-  <div class="calendar" hx-get="/calendar" hx-target="this">
+  <div class="calendar" hx-get="{% url 'calendar' %}" hx-target="this">
     <table>
       <thead>
         <tr>
@@ -20,13 +22,15 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Calendar days will be dynamically generated here -->
+        <tr hx-get="{% url 'weekdays' %}" hx-trigger="load">
+        </tr>
       </tbody>
     </table>
   </div>
 
   <script>
     document.addEventListener('htmx-target-updated', function(event) {
+      // Event listener code from the previous example
       var cells = document.querySelectorAll('.calendar td');
       cells.forEach(function(cell) {
         cell.addEventListener('click', function() {
