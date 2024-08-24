@@ -8,7 +8,11 @@
   <link rel="stylesheet" href="{% static 'motivait/style.css' %}"/>
 </head>
 <body>
-  <div class="calendar" hx-get="{% url 'calendar' %}" hx-target="this">
+  <div id="calendar-container">
+    <div class="controls">
+      <button hx-get="/calendar?month=prev"hx-target="#calendar-container" hx-swap="innerHTML">Previous Month</button>
+      <button hx-get="/calendar?month=next"hx-target="#calendar-container" hx-swap="innerHTML">Next Month</button>
+    </div>
     <table>
       <thead>
         <tr>
@@ -21,27 +25,25 @@
           <th>Saturday</th>
         </tr>
       </thead>
-      <tbody>
-        <tr hx-get="{% url 'weekdays' %}" hx-trigger="load">
-        </tr>
+      <tbody hx-get="/calendar-body" hx-trigger="load">
       </tbody>
     </table>
   </div>
 
-  <script>
-    document.addEventListener('htmx-target-updated', function(event) {
-      // Event listener code from the previous example
-      var cells = document.querySelectorAll('.calendar td');
-      cells.forEach(function(cell) {
-        cell.addEventListener('click', function() {
-          var selectedCell = document.querySelector('.calendar td.selected');
-          if (selectedCell) {
-            selectedCell.classList.remove('selected');
-          }
-          this.classList.add('selected');
-        });
-      });
-    });
-  </script>
+  <!-- <script> -->
+  <!--   document.addEventListener('htmx-target-updated', function(event) { -->
+  <!--     // Event listener code from the previous example -->
+  <!--     var cells = document.querySelectorAll('.calendar td'); -->
+  <!--     cells.forEach(function(cell) { -->
+  <!--       cell.addEventListener('click', function() { -->
+  <!--         var selectedCell = document.querySelector('.calendar td.selected'); -->
+  <!--         if (selectedCell) { -->
+  <!--           selectedCell.classList.remove('selected'); -->
+  <!--         } -->
+  <!--         this.classList.add('selected'); -->
+  <!--       }); -->
+  <!--     }); -->
+  <!--   }); -->
+  <!-- </script> -->
 </body>
 </html>
