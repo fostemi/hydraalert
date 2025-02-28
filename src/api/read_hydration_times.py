@@ -8,7 +8,10 @@ def parse_hydration_times():
     """Reads times from spreadsheet and reformats them into a list of times."""
     hydration_times = []
     values = read_google_sheet(RANGE_NAME)
-    times = values[1]
+    if values != None:
+        times = values[1]
+    else:
+        return
     times = times[1:]
     for time in times:
         time = convert_to_millitary_time(time)

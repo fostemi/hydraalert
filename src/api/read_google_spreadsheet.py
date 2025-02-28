@@ -16,6 +16,8 @@ SPREADSHEET_URL = (
     "https://docs.google.com/spreadsheets/d/1QPrWQh2f8m0EFWZF_Qf_AlE6ErnNjTGQYKNfwBxQqgE/"
 )
 
+# TODO: Make any spreadsheet readable
+
 def read_google_sheet(range):
     """Function from google to read cells in a google spreadsheet."""
     creds = None
